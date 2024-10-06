@@ -1,7 +1,7 @@
 
 export const getLineNumber = (line: string): number => {
 
-    const numbers = [...line].filter((dig) => Number(dig))
+    const numbers = [...line].filter(Number)
     const val = numbers.first() + numbers.last()!.toString()
     return Number(val);
 }
