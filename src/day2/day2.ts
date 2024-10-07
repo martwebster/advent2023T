@@ -1,11 +1,7 @@
-
-
 export class Game {
-
-
-    public maxRed = 0;
-    public maxGreen = 0;
-    public maxBlue = 0;
+    maxRed = 0;
+    maxGreen = 0;
+    maxBlue = 0;
     id: number;
 
     constructor(id: number) {
@@ -21,10 +17,10 @@ export class Game {
     }
 
     public static parse(line: String): Game {
-        const id = line.substring(5, line.indexOf(":"))
+        const id = line.substringBetween("Game ", ":");
         const game = new Game(Number(id));
 
-        const rounds = line.substring(line.indexOf(": ") + 1).trim();
+        const rounds = line.substringAfter(": ").trim();
         const counts = rounds.split("; ").flatMap(item => item.split(", "))
 
         for (const count of counts) {
@@ -50,13 +46,12 @@ export const countIds = (lines: String[]): number => {
     return lines
         .map(line => Game.parse(line))
         .filter(game => game.isValid(12, 13, 14))
-        .map(game => game.id)
-        .sum();
+        .sumOf(game => game.id);
 }
 
 
 export const powerGame = (lines: String[]): number => {
     return lines
-        .map(line => Game.parse(line).power())
-        .sum();
+        .map(line => Game.parse(line))
+        .sumOf(line => line.power());
 }
