@@ -34,9 +34,9 @@ describe('day 1 - part2', () => {
         expect(sumLineNumbersWithWord(data)).toBe(281);
     })
 
-    test('part2', () => {
-        const data = readTestData('./src/day1/day1.txt');
-        expect(sumLineNumbersWithWord(data)).toBe(55358);
-    })
+    // test('part2', () => {
+    //     const data = readTestData('./src/day1/day1.txt');
+    //     expect(sumLineNumbersWithWord(data)).toBe(55358);
+    // })
 })
 

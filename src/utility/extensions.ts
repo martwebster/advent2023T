@@ -10,6 +10,7 @@ declare global {
         minOf(attribute: (item: T) => number): number;
         max(): number;
         maxOf(attribute: (item: T) => number): number;
+        includesObject(obj: any): boolean;
     }
 
     interface String {
@@ -19,6 +20,7 @@ declare global {
         substringAfterLast(val: string): string;
         substringBeforeLast(val: string): string;
         substringBetweenLast(val1: string, val2: string): string;
+        isDigit(): boolean;
     }
 }
 
@@ -54,6 +56,15 @@ export const apply = () => {
     Array.prototype.maxOf = function (attribute: (item: any) => number) {
         return this.map(attribute).max();
     };
+
+    Array.prototype.maxOf = function (attribute: (item: any) => number) {
+        return this.map(attribute).max();
+    };
+    Array.prototype.includesObject = function (obj: any) {
+        return this.map(item => JSON.stringify(item)).includes(JSON.stringify(obj))
+    };
+
+
     String.prototype.substringAfter = function (val: string) {
         return this.substring(this.indexOf(val) + val.length)
     };
@@ -72,6 +83,7 @@ export const apply = () => {
     String.prototype.substringBetweenLast = function (val1: string, val2: string) {
         return this.substringBeforeLast(val2).substringAfterLast(val1)
     };
+    String.prototype.isDigit = function () {
+        return "0123456789".includes(this.charAt(0))
+    }
 }
-apply();
-

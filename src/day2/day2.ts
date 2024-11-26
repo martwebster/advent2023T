@@ -8,15 +8,15 @@ export class Game {
         this.id = id;
     }
 
-    public isValid(red: number, green: number, blue: number): any {
+    isValid(red: number, green: number, blue: number): any {
         return red >= this.maxRed && green >= this.maxGreen && blue >= this.maxBlue;
     }
 
-    public power(): number {
+    power(): number {
         return this.maxRed * this.maxGreen * this.maxBlue;
     }
 
-    public static parse(line: String): Game {
+    static parse(line: String): Game {
         const id = line.substringBetween("Game ", ":");
         const game = new Game(Number(id));
 
@@ -44,7 +44,7 @@ export class Game {
 
 export const countIds = (lines: String[]): number => {
     return lines
-        .map(line => Game.parse(line))
+        .map(Game.parse)
         .filter(game => game.isValid(12, 13, 14))
         .sumOf(game => game.id);
 }
@@ -52,6 +52,6 @@ export const countIds = (lines: String[]): number => {
 
 export const powerGame = (lines: String[]): number => {
     return lines
-        .map(line => Game.parse(line))
+        .map(Game.parse)
         .sumOf(line => line.power());
 }
